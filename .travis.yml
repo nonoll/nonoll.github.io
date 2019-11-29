@@ -1,35 +1,24 @@
 language: node_js
 
-node_js:
-- "8"
+before_script:
+  - npm install -g gatsby-cli
 
-cache:
-  directories:
-    - node_modules
+node_js:
+  - "10"
 
 # 알림 설정  
-notifications:
-  email:
-    recipients:
-      - hkroh.nonoll@gmail.com
-    on_success: always
-    on_failure: always
+# notifications:
+#   email:
+#     recipients:
+#       - hkroh.nonoll@gmail.com
+#     on_success: always
+#     on_failure: always
 
 # 배포 설정
 deploy:
-  provider: pages
-  skip-cleanup: true
-  keep-history: true
-  github-token: $GITHUB_TOKEN
-  local_dir: public
+  provider: script
+  # Note: change "docs" to the directory where your gatsby-site lives, if necessary
+  script: cd docs/ && yarn install && yarn run build
+  skip_cleanup: true
   on:
     branch: master
-
-before_install:
-  - npm install -g gatsby-cli
-
-install:
-  - npm install
-
-script:
-  - gatsby build --prefix-paths
