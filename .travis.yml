@@ -18,12 +18,13 @@ cache:
 # 배포 설정
 deploy:
   provider: pages
-  skip-cleanup: true
-  keep-history: true
-  github-token: $GITHUB_TOKEN
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
   local_dir: public
+  target_branch: master
   on:
-    branch: master
+    branch: gatsby
 
 before_install:
   - npm install -g gatsby-cli
@@ -33,4 +34,3 @@ install:
 
 script:
   - gatsby build --prefix-paths
-  - npm run deploy
