@@ -7,6 +7,12 @@ before_script:
 node_js:
   - "10"
 
+install:
+  - yarn install
+
+script:
+  - gatsby build --prefix-paths
+
 # 알림 설정  
 # notifications:
 #   email:
@@ -20,6 +26,7 @@ deploy:
   provider: script
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
   script: cd docs/ && yarn install && yarn run deploy
+  github-token: $GITHUB_TOKEN
   skip_cleanup: true
   on:
     branch: master
