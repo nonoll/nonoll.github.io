@@ -10,6 +10,11 @@ node_js:
 install:
   - yarn install
 
+
+before_script:
+  - git config --global user.name 'hkroh.nonoll'
+  - git config --global user.email 'hkroh.nonoll@gmail.com'
+
 script:
   - gatsby build --prefix-paths
 
@@ -23,10 +28,10 @@ script:
 
 # 배포 설정
 deploy:
+  github-token: $GITHUB_TOKEN
   provider: script
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
   script: cd public/ && yarn install && yarn run deploy
-  github-token: $GITHUB_TOKEN
   skip_cleanup: true
   on:
     branch: master
