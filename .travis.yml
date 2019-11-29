@@ -25,7 +25,7 @@ script:
 deploy:
   provider: script
   # Note: change "docs" to the directory where your gatsby-site lives, if necessary
-  script: cd docs/ && yarn install && yarn run deploy
+  script: cd public/ && yarn install && yarn run deploy
   github-token: $GITHUB_TOKEN
   skip_cleanup: true
   on:
