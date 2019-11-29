@@ -15,23 +15,41 @@ cache:
 #     on_success: always
 #     on_failure: always
 
-# 배포 설정
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  token: $GITHUB_TOKEN
-  keep_history: true
-  local_dir: public
-  target_branch: master
-  on:
-    branch: gatsby
+# Job Lifecycle
+# 1.  OPTIONAL Install apt addons
+# 2.  OPTIONAL Install cache components
+# 3.  before_install
+# 4.  install
+# 5.  before_script
+# 6.  script
+# 7.  OPTIONAL before_cache (for cleaning up cache)
+# 8.  after_success or after_failure
+# 9.  OPTIONAL before_deploy
+# 10. OPTIONAL deploy
+# 11. OPTIONAL after_deploy
+# 12. after_script
+# see: https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle
 
-before_install:
-  - npm install -g gatsby-cli
 
 install:
   - npm install
 
+
+before_install:
+  - npm install -g gatsby-cli
+
+
 script:
   - gatsby build --prefix-paths
+
+
+# 배포 설정
+deploy:
+  provider: pages
+  github_token: $GITHUB_TOKEN
+  local_dir: public
+  target_branch: master
+  skip_cleanup: true
+  keep_history: true
+  on:
+    branch: gatsby
