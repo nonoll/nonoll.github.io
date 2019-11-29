@@ -7,17 +7,6 @@ before_script:
 node_js:
   - "10"
 
-install:
-  - yarn install
-
-
-before_script:
-  - git config --global user.name 'hkroh.nonoll'
-  - git config --global user.email 'hkroh.nonoll@gmail.com'
-
-script:
-  - gatsby build --prefix-paths
-
 # 알림 설정  
 # notifications:
 #   email:
@@ -26,12 +15,25 @@ script:
 #     on_success: always
 #     on_failure: always
 
+
+# job-lifecycle: https://docs.travis-ci.com/user/job-lifecycle/
+before_script:
+  - git config --global user.name 'hkroh.nonoll'
+  - git config --global user.email 'hkroh.nonoll@gmail.com'
+
+install:
+  - yarn install
+
+script:
+  - gatsby build --prefix-paths
+  - yarn run deploy
+
 # 배포 설정
 deploy:
+  provider: pages
+  skip-cleanup: true
+  keep-history: true
   github-token: $GITHUB_TOKEN
-  provider: script
-  # Note: change "docs" to the directory where your gatsby-site lives, if necessary
-  script: cd public/ && yarn install && yarn run deploy
-  skip_cleanup: true
+  local_dir: public
   on:
     branch: master
