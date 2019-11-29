@@ -20,6 +20,7 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  token: $GITHUB_TOKEN
   keep_history: true
   local_dir: public
   target_branch: master
