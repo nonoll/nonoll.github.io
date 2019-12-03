@@ -11,10 +11,10 @@ class Menu extends React.Component {
         {menu.map(item => (
           <li className="menu__list-item" key={item.path}>
             <Link
-              exact
               to={item.path}
               className="menu__list-item-link"
               activeClassName="menu__list-item-link menu__list-item-link--active"
+              partiallyActive={true}
             >
               {item.label}
             </Link>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import AdSense from 'react-adsense';
 import PostTemplateDetails from '../components/PostTemplateDetails';
 
 class PostTemplate extends React.Component {
@@ -17,6 +18,13 @@ class PostTemplate extends React.Component {
           <meta name="description" content={description} />
         </Helmet>
         <PostTemplateDetails siteMetadata={siteMetadata} post={post} />
+        <AdSense.Google
+          client="ca-pub-6583782974868046"
+          slot="3185903488"
+          style={{ display: "block" }}
+          format="auto"
+          responsive="true"
+        />
       </div>
     );
   }

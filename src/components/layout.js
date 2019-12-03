@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import Sidebar from '../components/Sidebar';
 
 import Header from "./header"
 import "./layout.css"
@@ -25,10 +26,26 @@ if (typeof document !== 'undefined') {
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query SiteLayoutQuery {
       site {
         siteMetadata {
           title
+          subtitle
+          copyright
+          menu {
+            label
+            path
+          }
+          author {
+            name
+            email
+            telegram
+            twitter
+            github
+            rss
+            vk,
+            steemit
+          }
         }
       }
     }
@@ -45,6 +62,7 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
+        <Sidebar siteMetadata={data.site.siteMetadata} />
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
