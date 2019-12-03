@@ -7,7 +7,8 @@ cache:
   directories:
     - node_modules
 
-# 알림 설정  
+# 알림 설정
+# see: https://docs.travis-ci.com/user/notifications#configuring-email-notifications
 # notifications:
 #   email:
 #     recipients:
