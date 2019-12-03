@@ -37,6 +37,15 @@ class PostTemplateDetails extends React.Component {
       </div>
     );
 
+    const sanitizeTagName = html => {
+      return html.replace(/<h(\d)>(.+)<\/h\d>/gi, function(_, g1, g2) {
+        const name = `${g2}`.replace('.', '').replace(/\s/g, '-').toLowerCase();
+        return `<h${g1} name="${name}">${g2}</h${g1}>`;
+      });
+    }
+
+    post.html = sanitizeTagName(post.html);
+
     return (
       <div>
         {homeBlock}
@@ -53,7 +62,7 @@ class PostTemplateDetails extends React.Component {
             />
             <div className="post-single__body" dangerouslySetInnerHTML={{ __html: post.html }} />
             <div className="post-single__date">
-              <em>Published {moment(post.frontmatter.date).format('D MMM YYYY')}</em>
+              <em>Published {moment(post.frontmatter.date).format('YYYY.MM.DD')}</em>
             </div>
           </div>
           <div className="post-single__footer">

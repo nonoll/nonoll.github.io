@@ -9,6 +9,7 @@ class PostTemplate extends React.Component {
     const { title, subtitle } = siteMetadata;
     const post = this.props.data.markdownRemark;
     const { title: postTitle, description: postDescription } = post.frontmatter;
+    const tableOfContents = post.tableOfContents;
     const description = postDescription !== null ? postDescription : subtitle;
 
     return (
@@ -17,6 +18,7 @@ class PostTemplate extends React.Component {
           <title>{`${postTitle} - ${title}`}</title>
           <meta name="description" content={description} />
         </Helmet>
+        <div className="page__table" dangerouslySetInnerHTML={{ __html: tableOfContents }} />
         <PostTemplateDetails siteMetadata={siteMetadata} post={post} />
         <AdSense.Google
           client="ca-pub-6583782974868046"
@@ -58,6 +60,7 @@ export const pageQuery = graphql`
         date
         description
       }
+      tableOfContents
     }
   }
 `;
