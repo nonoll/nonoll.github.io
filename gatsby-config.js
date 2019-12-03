@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    url: 'https://nonoll.github.io/',
-    siteUrl: 'https://nonoll.github.io/',
+    url: 'https://nonoll.github.io',
+    siteUrl: 'https://nonoll.github.io',
     subtitle: 'nonoll',
     title: 'nonoll',
     description: 'description',
@@ -208,6 +208,40 @@ module.exports = {
             output: '/rss.xml'
           }
         ]
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+            {
+              site {
+                siteMetadata {
+                  url
+                  siteUrl
+                }
+              }
+              allSitePage(
+                filter: {
+                  path: { regex: "/^(?!/404/|/404.html|/dev-404-page/)/" }
+                }
+              ) {
+                edges {
+                  node {
+                    path
+                  }
+                }
+              }
+          }`,
+        output: '/sitemap.xml',
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.edges.map((edge) => {
+            return {
+              url: site.siteMetadata.url + edge.node.path,
+              changefreq: 'daily',
+              priority: 0.7
+            };
+          })
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
