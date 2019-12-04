@@ -162,6 +162,7 @@ module.exports = {
             site {
               siteMetadata {
                 site_url: url
+                siteUrl
                 title
                 description: subtitle
               }
